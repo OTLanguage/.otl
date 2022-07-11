@@ -1,5 +1,8 @@
 #!/bin/sh
 
+path=`pwd`
+cd ${HOME}/.otl
 java Main
+cd $path
 
 exit 0
