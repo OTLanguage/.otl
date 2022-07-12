@@ -2,7 +2,7 @@
 
 path=`pwd`
 cd ${HOME}/.otl
-java Main
+java Main path
 cd $path
 
 exit 0
