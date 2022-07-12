@@ -2,6 +2,13 @@
 
 path=`pwd`
 cd ${HOME}/.otl
+
+echo $1
+if [ $1 in * ]
+	echo "$1"
+	exit 0
+fi
+
 java Main path
 cd $path
 
