@@ -3,13 +3,12 @@
 path=`pwd`
 cd ${HOME}/.otl
 
-echo $1
-if [ $1 in * ]
-	echo "$1"
+if [ -z $1 ]; then
+	java Main "${path}"
+	cd $path
+	exit 0
+else
+	java Main "${path}" $1
+	cd $path
 	exit 0
 fi
-
-java Main path
-cd $path
-
-exit 0
