@@ -1,6 +1,7 @@
 #!/bin/sh
 
 path=`pwd`
+delete='uninstall'
 cd ${HOME}/.otl
 
 if [ -z $1 ]; then
@@ -8,7 +9,16 @@ if [ -z $1 ]; then
 	cd $path
 	exit 0
 else
-	java Main "${path}" $1
-	cd $path
-	exit 0
+	if [ ${1} == ${delete} ] ; then
+		sed -i '' '/alias otl="sh ${HOME}/d' ~/.zshrc
+		cd ${HOME}
+		rm -rf .otl
+		exit 0
+	else
+		echo ${1}
+		echo ${delete}
+		java Main "${path}" $1
+		cd $path
+		exit 0
+	fi
 fi
