@@ -10,10 +10,19 @@ if [ -z $1 ]; then
 	exit 0
 else
 	if [ ${1} == ${delete} ] ; then
-		sed -i '' '/alias otl="sh ${HOME}/d' ~/.zshrc
-		cd ${HOME}
-		rm -rf .otl
-		exit 0
+                if [ "$OSTYPE" == "linux-gnu"* ] ; then
+                        sed -i '' '/alias otl="sh ${HOME}/d' ~/.bashrc
+                        cd ${HOME}
+                        rm -rf .otl
+                        exit 0
+                elif [ "$OSTYPE" == "darwin"* ] ; then
+                        sed -i '' '/alias otl="sh ${HOME}/d' ~/.zshrc
+                        cd ${HOME}
+                        rm -rf .otl
+                        exit 0
+                else 
+                        echo 지원하지 않는 OS로 인해 삭제에 실페하였습니다.
+                fi
 	else
 		java Main "${path}" $1
 		cd $path
