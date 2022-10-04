@@ -3,10 +3,10 @@
 # shellcheck disable=SC2034,SC2006
 path=`pwd`
 delete='uninstall'
-java_run="${HOME}/.otl/run-tool/bin/java"
+otl_run="${HOME}/.otl/run-tool/bin/otl"
 
 if [ -z "$1" ]; then
-    $java_run -classpath "${HOME}"/.otl/analyzer Main "${path}"
+    $otl_run -classpath "${HOME}"/.otl/analyzer Main "${path}"
     exit 0
 else
   # shellcheck disable=SC2039,SC2081,SC2016
@@ -21,6 +21,6 @@ else
           echo "지원하지 않는 OS 입니다."
       fi
   else
-      $java_run -classpath "${HOME}"/.otl/analyzer Main "${path}" "$1"
+      $otl_run -classpath "${HOME}"/.otl/analyzer Main "${path}" "$1"
   fi
 fi
