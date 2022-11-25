@@ -4,29 +4,29 @@
 path=`pwd`
 delete='uninstall'
 install='install'
-OTL_HOME=""${HOME}"/.otl";
 
 # shellcheck disable=SC1068,SC2034,SC2039
-jarList=("$OTL_HOME"/analyzer)
+jarList=("${OTL_HOME}/analyzer")
 # shellcheck disable=SC2034,SC1073,SC1060,SC1057,SC2081,SC2039,SC2049,SC2206,SC2043
-for dirs in "$OTL_HOME"/module ; do
+for dirs in "$OTL_HOME"/module/* ; do
     for jars in "$dirs"/* ; do
       if [[ $jars == *.jar ]]; then
-        jarList+=($jars)
+        jarList+=("${jars}")
       fi
     done
 done
 
+
 # shellcheck disable=SC2039
-jar_path=$(IFS=, ; echo "${jarList[*]}")
+jar_path=$(IFS=: ; echo "${jarList[*]}")
 otl_start="${OTL_HOME}/run-tool/bin/otl"
 
 # shellcheck disable=SC2039
 if [ -z "$1" ]; then
-    $otl_start -classpath "${OTL_HOME}"/analyzer Main "${path}"
+    $otl_start -classpath "${jar_path}" Main "${path}"
     exit 0
 elif [ "${1}" == "${install}" ]; then
-    $otl_start -classpath "${OTL_HOME}"/analyzer Install "${2}"
+    $otl_start -classpath "${jar_path}" Install "${2}"
 else
   # shellcheck disable=SC2039,SC2081,SC2016
   if [ "${1}" == "${delete}" ]; then
