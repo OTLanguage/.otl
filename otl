@@ -1,49 +1,47 @@
 #!/bin/sh
 
-# shellcheck disable=SC2034,SC2027,SC2006
-path=`pwd`
-delete='uninstall'
-install='install'
+DELETE='uninstall'
+INSTALL='install'
+OTL_START="${OTL_HOME}/run-tool/bin/otl"
+SYSTEM_PATH="${OTL_HOME}/system.otls"
 
-# shellcheck disable=SC1068,SC2034,SC2039
-jarList=("${OTL_HOME}/analyzer")
-# shellcheck disable=SC2034,SC1073,SC1060,SC1057,SC2081,SC2039,SC2049,SC2206,SC2043
-for dirs in "$OTL_HOME"/module/* ; do
-    for jars in "$dirs"/* ; do
-      if [[ $jars == *.jar ]]; then
-        jarList+=("${jars}")
-      fi
-    done
-done
+JAR_FILES=("$OTL_HOME/analyzer")
+if [ -f "$SYSTEM_PATH" ]; then
+  MODE=""
+  while read line || [ -n "$line" ]; do
+    if [ -z "$line" ]; then
+      continue
+    elif [[ $line == *: ]]; then
+      MODE="${line:0:(${#line}-1)}"
+    elif [ -n "$MODE" ]; then
+      JAR_FILES+=("${OTL_HOME}/module/${MODE}/${line}")
+    fi
+  done < "$SYSTEM_PATH"
+fi
+JAR_PATH=$(IFS=: ; echo "${JAR_FILES[*]}")
 
-
-# shellcheck disable=SC2039
-jar_path=$(IFS=: ; echo "${jarList[*]}")
-otl_start="${OTL_HOME}/run-tool/bin/otl"
-
-# shellcheck disable=SC2039
-if [ -z "$1" ]; then
-    $otl_start -classpath "${jar_path}" Main "${path}"
-    exit 0
-elif [ "${1}" == "${install}" ]; then
-    $otl_start -classpath "${jar_path}" Install "${2}"
+if [ -z "${1}" ]; then
+  $OTL_START -classpath "${JAR_PATH}" Main
+  exit 0
+elif [ "${1}" -eq "${INSTALL}" ]; then
+  $OTL_START -classpath "${JAR_PATH}" Install "${2}"
+elif [ "${1}" -eq "${DELETE}" ]; then
+  case $SHELL in
+    "/bin/bash"|"bash")
+      ALIAS=~/.bashrc
+      ;;
+    "/bin/zsh"|"zsh")
+      ALIAS=~/.zshrc
+      ;;
+    *)
+      echo "지원하지 않는 Shell 입니다."
+      exit 0
+      ;;
+  esac
+  sed -i '' '/alias otl="sh ${OTL_HOME}/d' $ALIAS
+  sed -i '' '/export OTL_HOME=/d' $ALIAS
+  rm -rf "$OTL_HOME"
+  echo "삭제가 완료되었습니다."
 else
-  # shellcheck disable=SC2039,SC2081,SC2016
-  if [ "${1}" == "${delete}" ]; then
-      if [[ "${OSTYPE}" == "linux-gnu"* ]]; then
-          sed -i '' '/alias otl="sh ${OTL_HOME}/d' ~/.bashrc
-          sed -i '' '/export OTL_HOME=/d' ~/.bashrc
-          rm -rf .otl
-          echo "삭제가 완료되었습니다."
-      elif [[ "${OSTYPE}" == "darwin"* ]]; then
-          sed -i '' '/alias otl="sh ${OTL_HOME}/d' ~/.zshrc
-          sed -i '' '/export OTL_HOME=/d' ~/.zshrc
-          rm -rf .otl
-          echo "삭제가 완료되었습니다."
-      else
-          echo "지원하지 않는 OS 입니다."
-      fi
-  else
-    $otl_start -classpath "${jar_path}" Main "${path}" "$1"
-  fi
+  $OTL_START -classpath "${JAR_PATH}" Main "${1}"
 fi
