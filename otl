@@ -24,7 +24,7 @@ if [ -z "${1}" ]; then
   $OTL_START -classpath "${JAR_PATH}" Main
   exit 0
 elif [ "${1}" = "${INSTALL}" ]; then
-  $OTL_START -classpath "${JAR_PATH}" Install "${2}"
+  $OTL_START -classpath "${JAR_PATH}" Install "$@"
 elif [ "${1}" = "${DELETE}" ]; then
   read -p "Are you sure you want to delete it? (y/n) : " DELETE_CHECK
   if [ "$DELETE_CHECK" != "y" ]; then
@@ -63,5 +63,5 @@ elif [ "${1}" = "${DELETE}" ]; then
       ;;
   esac
 else
-  $OTL_START -classpath "${JAR_PATH}" Main "${1}"
+  $OTL_START -classpath "${JAR_PATH}" Main "$@"
 fi
