@@ -9,7 +9,7 @@ JAR_FILES=("$OTL_HOME/analyzer")
 if [ -f "$SYSTEM_PATH" ]; then
   MODE=""
   while read line || [ -n "$line" ]; do
-    if [ -z "$line" ]; then
+    if [ -z "$line" ] || [[ $line == \#* ]]; then
       continue
     elif [[ $line == *: ]]; then
       MODE="${line:0:(${#line}-1)}"
@@ -26,22 +26,42 @@ if [ -z "${1}" ]; then
 elif [ "${1}" -eq "${INSTALL}" ]; then
   $OTL_START -classpath "${JAR_PATH}" Install "${2}"
 elif [ "${1}" -eq "${DELETE}" ]; then
+  read -p "Are you sure you want to delete it? (y/n) : " DELETE_CHECK
+  if [ "$DELETE_CHECK" != "y" ]; then
+    echo "삭제를 취소합니다."
+    exit 0
+  fi
   case $SHELL in
-    "/bin/bash"|"bash")
+    "/bin/bash"|*bash*)
       ALIAS=~/.bashrc
       ;;
-    "/bin/zsh"|"zsh")
+    "/bin/zsh"|*zsh*)
       ALIAS=~/.zshrc
       ;;
     *)
+      printf "${SHELL} - "
       echo "지원하지 않는 Shell 입니다."
       exit 0
       ;;
   esac
-  sed -i '' '/alias otl="sh ${OTL_HOME}/d' $ALIAS
-  sed -i '' '/export OTL_HOME=/d' $ALIAS
-  rm -rf "$OTL_HOME"
-  echo "삭제가 완료되었습니다."
+  case $OSTYPE in
+    linux-gnu*)   # linux
+      sed -i '/alias otl/d' $ALIAS
+      sed -i '/export OTL_HOME/d' $ALIAS
+      rm -rf "$OTL_HOME"
+      echo "삭제가 완료되었습니다."
+      ;;
+    darwin*)      # mac
+      sed -i '' '/alias otl/d' $ALIAS
+      sed -i '' '/export OTL_HOME/d' $ALIAS
+      rm -rf "$OTL_HOME"
+      echo "삭제가 완료되었습니다."
+      ;;
+    *)
+      echo "지원하지 않는 OS 입니다."
+      exit 0
+      ;;
+  esac
 else
   $OTL_START -classpath "${JAR_PATH}" Main "${1}"
 fi
