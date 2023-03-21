@@ -10,13 +10,11 @@ wget https://github.com/OTLanguage/.otl/blob/main/analyzer/bin/apply/km/klass/Cr
 wget https://github.com/OTLanguage/.otl/blob/main/analyzer/bin/apply/km/klass/KlassItem.class -P analyzer/bin/apply/km/klass
 wget https://github.com/OTLanguage/.otl/blob/main/analyzer/bin/apply/km/DefineKMTool.class -P analyzer/bin/apply/km
 wget https://github.com/OTLanguage/.otl/blob/main/analyzer/bin/apply/km/method/MethodReplace.class -P analyzer/bin/apply/km/method
-wget https://github.com/OTLanguage/.otl/blob/main/analyzer/bin/apply/km/method/DefineMethod$1.class -P analyzer/bin/apply/km/method
-mv analyzer/bin/apply/km/method/DefineMethod.class.1 analyzer/bin/apply/km/method/DefineMethod$1.class
+wget https://github.com/OTLanguage/.otl/blob/main/analyzer/bin/apply/km/method/DefineMethod%241.class -P analyzer/bin/apply/km/method
 wget https://github.com/OTLanguage/.otl/blob/main/analyzer/bin/apply/km/method/MethodVoid.class -P analyzer/bin/apply/km/method
 wget https://github.com/OTLanguage/.otl/blob/main/analyzer/bin/apply/km/method/DefineMethod.class -P analyzer/bin/apply/km/method
 wget https://github.com/OTLanguage/.otl/blob/main/analyzer/bin/apply/calculator/number/NumberTool.class -P analyzer/bin/apply/calculator/number
-wget https://github.com/OTLanguage/.otl/blob/main/analyzer/bin/apply/calculator/number/NumberCalculator$1.class -P analyzer/bin/apply/calculator/number
-mv analyzer/bin/apply/calculator/number/NumberCalculator.class.1 analyzer/bin/apply/calculator/number/NumberCalculator$1.class
+wget https://github.com/OTLanguage/.otl/blob/main/analyzer/bin/apply/calculator/number/NumberCalculator%241.class -P analyzer/bin/apply/calculator/number
 wget https://github.com/OTLanguage/.otl/blob/main/analyzer/bin/apply/calculator/number/NumberCalculator.class -P analyzer/bin/apply/calculator/number
 wget https://github.com/OTLanguage/.otl/blob/main/analyzer/bin/apply/calculator/number/FloatCalculator.class -P analyzer/bin/apply/calculator/number
 wget https://github.com/OTLanguage/.otl/blob/main/analyzer/bin/apply/calculator/number/IntegerCalculator.class -P analyzer/bin/apply/calculator/number
@@ -44,18 +42,13 @@ wget https://github.com/OTLanguage/.otl/blob/main/analyzer/bin/repository/WorkMa
 wget https://github.com/OTLanguage/.otl/blob/main/analyzer/bin/repository/code/CodeMap.class -P analyzer/bin/repository/code
 wget https://github.com/OTLanguage/.otl/blob/main/analyzer/bin/repository/code/CodesMap.class -P analyzer/bin/repository/code
 wget https://github.com/OTLanguage/.otl/blob/main/analyzer/bin/repository/AccessList.class -P analyzer/bin/repository
-wget https://github.com/OTLanguage/.otl/blob/main/analyzer/bin/repository/TypeMap$1.class -P analyzer/bin/repository
-mv analyzer/bin/repository/TypeMap.class.1 analyzer/bin/repository/TypeMap$1.class
+wget https://github.com/OTLanguage/.otl/blob/main/analyzer/bin/repository/TypeMap%241.class -P analyzer/bin/repository
 wget https://github.com/OTLanguage/.otl/blob/main/analyzer/bin/repository/HpMap.class -P analyzer/bin/repository
-wget https://github.com/OTLanguage/.otl/blob/main/analyzer/bin/Repository$3.class -P analyzer/bin
-mv analyzer/bin/Repository.class.3 analyzer/bin/Repository$3.class
-wget https://github.com/OTLanguage/.otl/blob/main/analyzer/bin/Repository$1.class -P analyzer/bin
-mv analyzer/bin/Repository.class.1 analyzer/bin/Repository$1.class
+wget https://github.com/OTLanguage/.otl/blob/main/analyzer/bin/Repository%243.class -P analyzer/bin
+wget https://github.com/OTLanguage/.otl/blob/main/analyzer/bin/Repository%241.class -P analyzer/bin
 wget https://github.com/OTLanguage/.otl/blob/main/analyzer/bin/variable/CreateTool.class -P analyzer/bin/variable
-wget https://github.com/OTLanguage/.otl/blob/main/analyzer/bin/variable/CreateTool$3.class -P analyzer/bin/variable
-mv analyzer/bin/variable/CreateTool.class.3 analyzer/bin/variable/CreateTool$3.class
-wget https://github.com/OTLanguage/.otl/blob/main/analyzer/bin/variable/CreateTool$1.class -P analyzer/bin/variable
-mv analyzer/bin/variable/CreateTool.class.1 analyzer/bin/variable/CreateTool$1.class
+wget https://github.com/OTLanguage/.otl/blob/main/analyzer/bin/variable/CreateTool%243.class -P analyzer/bin/variable
+wget https://github.com/OTLanguage/.otl/blob/main/analyzer/bin/variable/CreateTool%241.class -P analyzer/bin/variable
 wget https://github.com/OTLanguage/.otl/blob/main/analyzer/bin/variable/origin/CreateCharacter.class -P analyzer/bin/variable/origin
 wget https://github.com/OTLanguage/.otl/blob/main/analyzer/bin/variable/origin/CreateLong.class -P analyzer/bin/variable/origin
 wget https://github.com/OTLanguage/.otl/blob/main/analyzer/bin/variable/origin/CreateDouble.class -P analyzer/bin/variable/origin
@@ -63,22 +56,17 @@ wget https://github.com/OTLanguage/.otl/blob/main/analyzer/bin/variable/origin/C
 wget https://github.com/OTLanguage/.otl/blob/main/analyzer/bin/variable/origin/CreateInteger.class -P analyzer/bin/variable/origin
 wget https://github.com/OTLanguage/.otl/blob/main/analyzer/bin/variable/origin/CreateString.class -P analyzer/bin/variable/origin
 wget https://github.com/OTLanguage/.otl/blob/main/analyzer/bin/variable/origin/CreateFloat.class -P analyzer/bin/variable/origin
-wget https://github.com/OTLanguage/.otl/blob/main/analyzer/bin/variable/CreateTool$2.class -P analyzer/bin/variable
-mv analyzer/bin/variable/CreateTool.class.2 analyzer/bin/variable/CreateTool$2.class
-wget https://github.com/OTLanguage/.otl/blob/main/analyzer/bin/variable/custom/CustomTool$1.class -P analyzer/bin/variable/custom
-mv analyzer/bin/variable/custom/CustomTool.class.1 analyzer/bin/variable/custom/CustomTool$1.class
+wget https://github.com/OTLanguage/.otl/blob/main/analyzer/bin/variable/CreateTool%242.class -P analyzer/bin/variable
+wget https://github.com/OTLanguage/.otl/blob/main/analyzer/bin/variable/custom/CustomTool%241.class -P analyzer/bin/variable/custom
 wget https://github.com/OTLanguage/.otl/blob/main/analyzer/bin/variable/custom/CustomTool.class -P analyzer/bin/variable/custom
 wget https://github.com/OTLanguage/.otl/blob/main/analyzer/bin/variable/custom/CustomSet.class -P analyzer/bin/variable/custom
 wget https://github.com/OTLanguage/.otl/blob/main/analyzer/bin/variable/custom/CustomMap.class -P analyzer/bin/variable/custom
 wget https://github.com/OTLanguage/.otl/blob/main/analyzer/bin/variable/custom/CustomList.class -P analyzer/bin/variable/custom
-wget https://github.com/OTLanguage/.otl/blob/main/analyzer/bin/variable/custom/CustomMap$1.class -P analyzer/bin/variable/custom
-mv analyzer/bin/variable/custom/CustomMap.class.1 analyzer/bin/variable/custom/CustomMap$1.class
+wget https://github.com/OTLanguage/.otl/blob/main/analyzer/bin/variable/custom/CustomMap%241.class -P analyzer/bin/variable/custom
 wget https://github.com/OTLanguage/.otl/blob/main/analyzer/bin/variable/Types.class -P analyzer/bin/variable
 wget https://github.com/OTLanguage/.otl/blob/main/analyzer/bin/Setting.class -P analyzer/bin
-wget https://github.com/OTLanguage/.otl/blob/main/analyzer/bin/Repository$4.class -P analyzer/bin
-mv analyzer/bin/Repository.class.4 analyzer/bin/Repository$4.class
-wget https://github.com/OTLanguage/.otl/blob/main/analyzer/bin/Repository$2.class -P analyzer/bin
-mv analyzer/bin/Repository.class.2 analyzer/bin/Repository$2.class
+wget https://github.com/OTLanguage/.otl/blob/main/analyzer/bin/Repository%244.class -P analyzer/bin
+wget https://github.com/OTLanguage/.otl/blob/main/analyzer/bin/Repository%242.class -P analyzer/bin
 wget https://github.com/OTLanguage/.otl/blob/main/analyzer/bin/system/except/Try.class -P analyzer/bin/system/except
 wget https://github.com/OTLanguage/.otl/blob/main/analyzer/bin/system/etc/Quit.class -P analyzer/bin/system/etc
 wget https://github.com/OTLanguage/.otl/blob/main/analyzer/bin/system/etc/GetType.class -P analyzer/bin/system/etc
@@ -87,8 +75,7 @@ wget https://github.com/OTLanguage/.otl/blob/main/analyzer/bin/system/CreateSyst
 wget https://github.com/OTLanguage/.otl/blob/main/analyzer/bin/system/loop/If.class -P analyzer/bin/system/loop
 wget https://github.com/OTLanguage/.otl/blob/main/analyzer/bin/system/loop/While.class -P analyzer/bin/system/loop
 wget https://github.com/OTLanguage/.otl/blob/main/analyzer/bin/system/loop/For.class -P analyzer/bin/system/loop
-wget https://github.com/OTLanguage/.otl/blob/main/analyzer/bin/system/loop/For$1.class -P analyzer/bin/system/loop
-mv analyzer/bin/system/loop/For.class.1 analyzer/bin/system/loop/For$1.class
+wget https://github.com/OTLanguage/.otl/blob/main/analyzer/bin/system/loop/For%241.class -P analyzer/bin/system/loop
 wget https://github.com/OTLanguage/.otl/blob/main/analyzer/bin/system/console/Print.class -P analyzer/bin/system/console
 wget https://github.com/OTLanguage/.otl/blob/main/analyzer/bin/system/console/PrintTab.class -P analyzer/bin/system/console
 wget https://github.com/OTLanguage/.otl/blob/main/analyzer/bin/system/console/Println.class -P analyzer/bin/system/console
@@ -109,21 +96,16 @@ wget https://github.com/OTLanguage/.otl/blob/main/analyzer/bin/exception/FileExc
 wget https://github.com/OTLanguage/.otl/blob/main/analyzer/bin/exception/VariableException.class -P analyzer/bin/exception
 wget https://github.com/OTLanguage/.otl/blob/main/analyzer/bin/exception/MatchException.class -P analyzer/bin/exception
 wget https://github.com/OTLanguage/.otl/blob/main/analyzer/bin/exception/ExceptionTool.class -P analyzer/bin/exception
-wget https://github.com/OTLanguage/.otl/blob/main/analyzer/bin/exception/FileException$1.class -P analyzer/bin/exception
-mv analyzer/bin/exception/FileException.class.1 analyzer/bin/exception/FileException$1.class
-wget https://github.com/OTLanguage/.otl/blob/main/analyzer/bin/exception/MatchException$1.class -P analyzer/bin/exception
-mv analyzer/bin/exception/MatchException.class.1 analyzer/bin/exception/MatchException$1.class
-wget https://github.com/OTLanguage/.otl/blob/main/analyzer/bin/exception/VariableException$1.class -P analyzer/bin/exception
-mv analyzer/bin/exception/VariableException.class.1 analyzer/bin/exception/VariableException$1.class
+wget https://github.com/OTLanguage/.otl/blob/main/analyzer/bin/exception/FileException%241.class -P analyzer/bin/exception
+wget https://github.com/OTLanguage/.otl/blob/main/analyzer/bin/exception/MatchException%241.class -P analyzer/bin/exception
+wget https://github.com/OTLanguage/.otl/blob/main/analyzer/bin/exception/VariableException%241.class -P analyzer/bin/exception
 wget https://github.com/OTLanguage/.otl/blob/main/analyzer/Install.class -P analyzer
-wget https://github.com/OTLanguage/.otl/blob/main/analyzer/Main$1.class -P analyzer
-mv analyzer/Main.class.1 analyzer/Main$1.class
+wget https://github.com/OTLanguage/.otl/blob/main/analyzer/Main%241.class -P analyzer
 wget https://github.com/OTLanguage/.otl/blob/main/analyzer/work/ResetWork.class -P analyzer/work
 wget https://github.com/OTLanguage/.otl/blob/main/analyzer/work/WorkTool.class -P analyzer/work
 wget https://github.com/OTLanguage/.otl/blob/main/analyzer/work/CreateWork.class -P analyzer/work
 wget https://github.com/OTLanguage/.otl/blob/main/analyzer/work/StartWork.class -P analyzer/work
 wget https://github.com/OTLanguage/.otl/blob/main/analyzer/work/LoopWork.class -P analyzer/work
 wget https://github.com/OTLanguage/.otl/blob/main/analyzer/work/ReplaceWork.class -P analyzer/work
-wget https://github.com/OTLanguage/.otl/blob/main/analyzer/work/LoopWork$1.class -P analyzer/work
-mv analyzer/work/LoopWork.class.1 analyzer/work/LoopWork$1.class
+wget https://github.com/OTLanguage/.otl/blob/main/analyzer/work/LoopWork%241.class -P analyzer/work
 wget https://github.com/OTLanguage/.otl/blob/main/analyzer/Main.class -P analyzer
