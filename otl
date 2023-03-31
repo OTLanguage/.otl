@@ -1,13 +1,13 @@
 #!/bin/sh
 
-DELETE='uninstall'
-INSTALL='install'
 OTL_START="${OTL_HOME}/run-tool/bin/otl"
 SYSTEM_PATH="${OTL_HOME}/system.otls"
 
-JAR_FILES=("$OTL_HOME/analyzer")
+# shellcheck disable=SC2039 disable=SC2162
+JAR_FILES=("${OTL_HOME}/analyzer")
 if [ -f "$SYSTEM_PATH" ]; then
   MODE=""
+  # shellcheck disable=SC2162 disable=SC2039
   while read line || [ -n "$line" ]; do
     if [ -z "$line" ] || [[ $line == \#* ]]; then
       continue
@@ -18,14 +18,11 @@ if [ -f "$SYSTEM_PATH" ]; then
     fi
   done < "$SYSTEM_PATH"
 fi
+# shellcheck disable=SC2039
 JAR_PATH=$(IFS=: ; echo "${JAR_FILES[*]}")
 
-if [ -z "${1}" ]; then
-  $OTL_START -classpath "${JAR_PATH}" Main
-  exit 0
-elif [ "${1}" = "${INSTALL}" ]; then
-  $OTL_START -classpath "${JAR_PATH}" Install "$@"
-elif [ "${1}" = "${DELETE}" ]; then
+# shellcheck disable=SC2039 disable=SC2162 disable=SC2059 disable=SC2039
+uninstall() {
   read -p "Are you sure you want to delete it? (y/n) : " DELETE_CHECK
   if [ "$DELETE_CHECK" != "y" ]; then
     echo "삭제를 취소합니다."
@@ -44,7 +41,7 @@ elif [ "${1}" = "${DELETE}" ]; then
       exit 0
       ;;
   esac
-  case $OSTYPE in
+  case ${OSTYPE} in
     linux-gnu*)   # linux
       sed -i '/alias otl/d' $ALIAS
       sed -i '/export OTL_HOME/d' $ALIAS
@@ -60,6 +57,113 @@ elif [ "${1}" = "${DELETE}" ]; then
     *)
       echo "지원하지 않는 OS 입니다."
       exit 0
+      ;;
+  esac
+}
+
+# shellcheck disable=SC2006 disable=SC2162 disable=SC2039
+sub_download() {
+  READ_HTTP="$(wget https://raw.githubusercontent.com/OTLanguage/module/main/"${1}"/system.otls -q -O -)"
+  if [ -z "${READ_HTTP}" ]
+  then
+    echo "${1}는 존재하지 않는 모듈입니다."
+    exit 0
+  fi
+
+  TYPE=""
+  FILE_CONTENT=""
+  if [[ `cat "${OTL_HOME}/system.otls"` == *${1}:* ]]; then
+    CHECK=""
+    while read line || [ -n "$line" ] ; do
+      if [ -z "$line" ]; then
+        continue
+      elif [[ "$line" == *: ]]; then
+        if [[ "$line" == ${1}: ]]; then
+          CHECK="1"
+        else
+          CHECK=""
+          FILE_CONTENT+="${line}${IFS}"
+        fi
+      elif [ "${CHECK}" = "" ]; then
+        FILE_CONTENT+="    ${line}${IFS}"
+      fi
+    done < "${OTL_HOME}/system.otls"
+  else
+    FILE_CONTENT=$(<"${OTL_HOME}/system.otls")
+  fi
+
+  rm -rf "${OTL_HOME}/analyzer/cos/${1}"
+  rm -rf "${OTL_HOME}/module/${1}"
+  FILE_CONTENT+="${IFS}${1}:${IFS}"
+  for line in ${READ_HTTP}
+  do
+    if [[ "$line" == *: ]]; then
+      TYPE="${line:0:${#line}-1}"
+    elif [ -z "$TYPE" ] || [ -z "$line" ]; then
+      continue
+    else
+      case "$TYPE" in
+        "class")
+          FILE_PATH="${OTL_HOME}"/analyzer/cos/$(echo "$line" | sed -e "s/~/\//g")
+          FILE_NAME=$(basename "$FILE_PATH")
+          DOWNLOAD_PATH="${FILE_PATH:0:${#FILE_PATH}-${#FILE_NAME}-1}"
+          wget https://github.com/OTLanguage/module/raw/main/"${1}"/"${FILE_NAME}" -P "${DOWNLOAD_PATH}"
+          ;;
+
+        "jar")
+          FILE_PATH="${OTL_HOME}/module/${1}/${line}"
+          FILE_NAME=$(basename "$FILE_PATH")
+          DOWNLOAD_PATH="${FILE_PATH:0:${#FILE_PATH}-${#FILE_NAME}-1}"
+          wget https://github.com/OTLanguage/module/raw/main/"${1}"/"${FILE_NAME}" -P "${DOWNLOAD_PATH}"
+          FILE_CONTENT+="    ${FILE_NAME}${IFS}"
+          ;;
+
+        "other")
+          FILE_PATH="${OTL_HOME}/module/${1}/${line}"
+          FILE_NAME=$(basename "$FILE_PATH")
+          DOWNLOAD_PATH="${FILE_PATH:0:${#FILE_PATH}-${#FILE_NAME}-1}"
+          wget https://github.com/OTLanguage/module/raw/main/"${1}"/"${FILE_NAME}" -P "${DOWNLOAD_PATH}"
+          ;;
+      esac
+    fi
+  done
+  echo "${FILE_CONTENT}" > "${OTL_HOME}/system.otls"
+}
+
+add_download() {
+  EXT="$(wget https://raw.githubusercontent.com/OTLanguage/module/main/"${1}"/add.otls -q -O -)"
+  FILE_NAME="${2}${EXT}"
+  rm "${OTL_HOME}/module/${1}/${FILE_NAME}"
+  wget https://github.com/OTLanguage/module/raw/main/"${1}"/"${FILE_NAME}" -P "${OTL_HOME}/module/${1}"
+}
+
+
+# shellcheck disable=SC2039 disable=SC2162 disable=SC2059
+if [ ${#@} = 0 ]; then
+  $OTL_START -classpath "${JAR_PATH}" Main
+elif [[ ${1} == -* ]]; then
+  case "${1}" in
+    "-help"|"-h")
+      echo "    Shell Mode: otl"
+      echo "    File Mode: otl <file>"
+      echo
+      echo "    OTLanguage delete : -remove"
+      echo "                        -rm"
+      echo
+      echo "    Module install : -install <module name>"
+      echo "                       -i <module name>"
+      ;;
+    "-remove"|"-rm") uninstall ;;
+    "-install"|"-i")
+      if [ ${#@} == 3 ]; then
+        EXT="$(wget https://raw.githubusercontent.com/OTLanguage/module/main/"${2}"/add.otls -q -O -)"
+        add_download "${2}" "${3}"
+      else
+        sub_download "${2}"
+      fi
+      ;;
+    *)
+      echo "    OTLanguage information : -help -h"
       ;;
   esac
 else
