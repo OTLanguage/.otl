@@ -71,7 +71,6 @@ uninstall() {
   esac
   # shellcheck disable=SC1090
   source "${ALIAS}"
-  echo "삭제를 완료하였습니다."
 }
 
 # shellcheck disable=SC2162 disable=SC2039
