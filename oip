@@ -166,6 +166,14 @@ add_download() {
   wget https://github.com/OTLanguage/module/raw/main/"${1}"/"${FILE_NAME}" -P "${OTL_HOME}/module/${1}"
 }
 
+reinstall() {
+  rm -rf "${OTL_HOME}/analyzer/bin"
+  rm -rf "${OTL_HOME}/analyzer/work"
+  rm "${OTL_HOME}/analyzer/*"
+  wget https://github.com/OTLanguage/download-tool/raw/main/analyzer.zip -P "${OTL_HOME}"
+  unzip "${OTL_HOME}/analyzer.zip" -d "${OTL_HOME}/analyzer"
+  rm "${OTL_HOME}/analyzer.zip"
+}
 
 # shellcheck disable=SC2039
 case "${1}" in
@@ -185,9 +193,15 @@ case "${1}" in
       *) abort "옵션이 유효하지 않습니다." ;;
     esac
     ;;
+  "reinstall")
+    case ${#@} in
+      1) reinstall ;;
+      *) abort "옵션이 유효하지 않습니다." ;;
+    esac
+    ;;
   *)
     echo "oip <option> [module names]"
-    echo "    option : install, uninstall"
+    echo "    option : install, uninstall, reinstall"
     abort "옵션이 유효하지 않습니다."
     ;;
 esac
