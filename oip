@@ -169,7 +169,7 @@ add_download() {
 reinstall() {
   rm -rf "${OTL_HOME}/analyzer/bin"
   rm -rf "${OTL_HOME}/analyzer/work"
-  rm "${OTL_HOME}/analyzer/*"
+  rm -rf "${OTL_HOME}"/analyzer/*.class
   wget https://github.com/OTLanguage/download-tool/raw/main/analyzer.zip -P "${OTL_HOME}"
   unzip "${OTL_HOME}/analyzer.zip" -d "${OTL_HOME}/analyzer"
   rm "${OTL_HOME}/analyzer.zip"
