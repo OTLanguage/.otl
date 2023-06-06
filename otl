@@ -80,7 +80,6 @@ if [ ${#ARGS[@]} = 0 ]; then
   done
   JAR_PATH=$(IFS=: ; echo "${JAR_FILES[*]}")
   $OTL_START -Dfile.encoding=UTF-8 -classpath "${JAR_PATH}" Main ""
-#  $OTL_START -Dfile.encoding=UTF-8 -classpath "${JAR_PATH}" Main ""
 else
   # compile shell
   for module in `${OTL_START} -Dfile.encoding=UTF-8 -classpath "${JAR_PATH[0]}" Main "-c" "${ARGS[0]}"` ; do

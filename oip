@@ -21,7 +21,7 @@ case "${SHELL}" in
 esac
 
 installFile() {
-  wget https://github.com/OTLanguage/module/raw/main/"${1}" -O "${2}"
+  wget https://github.com/OTLanguage/module/raw/main/"${1}" -P "${2}"
 }
 
 # 1 : url, 2 : file name
