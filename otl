@@ -75,7 +75,7 @@ done
 
 # shellcheck disable=SC2039 disable=SC2006 disable=SC2207 disable=SC2116
 if [ ${#ARGS[@]} = 0 ]; then
-  for module in `echo "${OTL_HOME}/module/*"` ; do
+  for module in `echo "${OTL_HOME}/module/"*` ; do
     JAR_FILES+=(`findJar "${module}"`)
   done
   JAR_PATH=$(IFS=: ; echo "${JAR_FILES[*]}")
