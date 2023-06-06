@@ -35,12 +35,24 @@ findJar() {
 
 # shellcheck disable=SC2006 disable=SC2039
 version() {
-  if [ ${#@} = 1 ]; then
+  if [ ${#@} != 1 ]; then
     abort "option error"
   else
-    finish "OTLanguage version $(${OTL_START} -Dfile.encoding=UTF-8 -classpath "${JAR_PATH[0]}" Main "${1}")"
+    finish "OTLanguage version $(${OTL_START} -Dfile.encoding=UTF-8 -classpath "${JAR_FILES[0]}" Main "${1}")"
   fi
 }
+
+# shellcheck disable=SC2039
+JAR_FILES=("${OTL_HOME}/analyzer")
+
+# shellcheck disable=SC2039 disable=SC2006
+while [ -n "${1}" ]; do
+  case "${1}" in
+    "-version") version "-v" ;;
+    *) break ;;
+  esac
+  shift
+done
 
 # shellcheck disable=SC2039 disable=SC2034
 case ${#@} in
@@ -60,18 +72,6 @@ fileFind "${OTL_START}"
 if ! [ -x "${OTL_START}" ]; then
   abort "Unable to execute '$(basename "${OTL_START}")' file."
 fi
-
-# shellcheck disable=SC2039
-JAR_FILES=("${OTL_HOME}/analyzer")
-
-# shellcheck disable=SC2039 disable=SC2006
-while [ -n "${1}" ]; do
-  case "${1}" in
-    "-version") version "-v" ;;
-    *) break ;;
-  esac
-  shift
-done
 
 # shellcheck disable=SC2039 disable=SC2006 disable=SC2207 disable=SC2116 disable=SC2045
 if [ ${#ARGS[@]} = 0 ]; then
