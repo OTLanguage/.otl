@@ -38,7 +38,7 @@ version() {
   if [ ${#@} = 1 ]; then
     abort "option error"
   else
-    finish "OTLanguage version " `${OTL_START} -Dfile.encoding=UTF-8 -classPath "${JAR_PATH[0]}" Main "${1}"`
+    finish "OTLanguage version $(${OTL_START} -Dfile.encoding=UTF-8 -classPath "${JAR_PATH[0]}" Main "${1}")"
   fi
 }
 
