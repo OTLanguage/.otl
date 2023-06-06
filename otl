@@ -48,7 +48,7 @@ JAR_FILES=("${OTL_HOME}/analyzer")
 # shellcheck disable=SC2039 disable=SC2006
 while [ -n "${1}" ]; do
   case "${1}" in
-    "-version") version "-v" ;;
+    "--version"|"-v") version "-v" ;;
     *) break ;;
   esac
   shift
